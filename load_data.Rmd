@@ -9,6 +9,7 @@ output: html_document
 install.packages("tidyverse")
 install.packages("stringr")
 install.packages("readr")
+install.packages("modelr")
 
 ```
 ```{r}
@@ -16,6 +17,8 @@ library(tidyverse)
 library(stringr)
 library(readr)
 library(dplyr)
+library(ggplot2)
+library(modelr)
 ```
 
 
@@ -41,8 +44,37 @@ NHL$NAME<-gsub("\xa0", "", NHL$NAME)
 ```
 
 ### Load data with salary in NHL 
+```{r}
+NBA<- rename(NBA, INDEX = RK)
+NFL<- rename(NFL, INDEX = RK)
+NHL<- rename(NHL, INDEX = RK)
+
+```
+
+
+```{r}
+NBA_desc_sort <- NBA %>% arrange(desc(SALARY))
+NBA_desc_sort 
+NFL_desc_sort <- NFL %>% arrange(desc(SALARY))
+NFL_desc_sort 
+NHL_desc_sort <- NHL %>% arrange(desc(SALARY))
+NHL_desc_sort 
+```
+### The date has been sorted descending order to see who earns the most. 
+
+```{r}
+NBA<- NBA %>% mutate(Salary1000 = SALARY/1000)
+NBA_plot1<-ggplot(NBA, aes(x = INDEX, y = Salary1000))+stat_smooth(size = 3)+ geom_point()
+NBA_plot1 +theme_bw() +theme(legend.position = "none") + theme(text=element_text(size=15)) + ggtitle("Salary in thousands of dollars")
+```
+
 
 ```{r}
 
+
 ```
+
+
+
+
 
