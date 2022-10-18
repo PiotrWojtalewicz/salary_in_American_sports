@@ -1,0 +1,48 @@
+---
+title: "Salary_in_American_sports"
+author: "Piotr Wojtalewicz"
+date: '2022-10-18'
+output: html_document
+---
+
+```{r}
+install.packages("tidyverse")
+install.packages("stringr")
+install.packages("readr")
+
+```
+```{r}
+library(tidyverse)
+library(stringr)
+library(readr)
+library(dplyr)
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+NBA <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NBA_salary.csv", sep = ";")
+```
+
+### Load data with salary in NBA
+
+```{r}
+NFL <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NFL_salary.csv", sep = ";")
+```
+
+### Load data with salary in NFL
+
+```{r}
+NHL <- read_csv2("C:/Users/piotr/OneDrive/Pulpit/salary/NHL_salary.csv")
+NHL$NAME<-gsub("\xa0", "", NHL$NAME)
+```
+
+### Load data with salary in NHL 
+
+```{r}
+
+```
+
