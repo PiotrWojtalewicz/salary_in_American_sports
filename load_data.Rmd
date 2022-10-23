@@ -40,10 +40,45 @@ NFL <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NFL_salary.csv", sep = ";
 
 ```{r}
 NHL <- read_csv2("C:/Users/piotr/OneDrive/Pulpit/salary/NHL_salary.csv")
-NHL$NAME<-gsub("\xa0", "", NHL$NAME)
+NHL$NAME<-gsub("/xa0", "", NHL$NAME)
 ```
 
 ### Load data with salary in NHL 
+
+
+
+
+```{r}
+NBA_player_statistics<- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NBA_total_statistic_20212022.csv", sep = ";")
+```
+
+### Load date with personal statistics in 2021/2022 season
+
+```{r}
+NBA_team_statistics <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NBA_team_statistics_20212022.csv", sep = ";")
+```
+### Load date with team statistics in 2021/2022 season
+
+
+```{r}
+NBA_value_teams <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NBA_value_team_20212022.csv", sep = ";")
+```
+
+### load date with value of NBA teams in bilions dollars
+
+```{r}
+NHL_value_teams <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NHL_value_team_20212022.csv", sep = ";")
+```
+### load date with value of NHL teams in bilions dollars
+
+```{r}
+NFL_value_teams <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NFL_team_value.csv", sep = ";")
+```
+### load date with value of NFL teams in bilions dollars
+
+
+
+
 ```{r}
 NBA<- rename(NBA, INDEX = RK)
 NFL<- rename(NFL, INDEX = RK)
@@ -60,19 +95,54 @@ NFL_desc_sort
 NHL_desc_sort <- NHL %>% arrange(desc(SALARY))
 NHL_desc_sort 
 ```
-### The date has been sorted descending order to see who earns the most. 
+### The date has been sorted descending order to see who earns the most.
 
 ```{r}
-NBA<- NBA %>% mutate(Salary1000 = SALARY/1000)
+NBA <- NBA %>% mutate(Salary1000 = SALARY/1000)
+NFL <- NFL%>% mutate(Salary1000 = SALARY/1000)
+NHL <- NHL%>% mutate(Salary1000 = SALARY/1000)
+```
+
+```{r}
+NBA %>% summarise(mean_salary1000 = mean(Salary1000), sd_salary1000 = sqrt(var(Salary1000)), median_salary1000= median(Salary1000), min_salary1000 = min(Salary1000), max_salary1000 = max(Salary1000))
+
+NHL %>% summarise(mean_salary1000 = mean(Salary1000), sd_salary1000 = sqrt(var(Salary1000)), median_salary1000= median(Salary1000), min_salary1000 = min(Salary1000), max_salary1000 = max(Salary1000))
+
+NFL %>% summarise(mean_salary1000 = mean(Salary1000), sd_salary1000 = sqrt(var(Salary1000)), median_salary1000= median(Salary1000), min_salary1000 = min(Salary1000), max_salary1000 = max(Salary1000))
+
+
+  
+```
+
+
+
+```{r}
+
 NBA_plot1<-ggplot(NBA, aes(x = INDEX, y = Salary1000))+stat_smooth(size = 3)+ geom_point()
 NBA_plot1 +theme_bw() +theme(legend.position = "none") + theme(text=element_text(size=15)) + ggtitle("Salary in thousands of dollars")
 ```
 
 
 ```{r}
-
-
+sorted_NBA_players <- arrange(NBA, TEAM, desc(SALARY))
+sorted_NBA_players
 ```
+
+
+```{r}
+Atlanta_Hawks <- filter(sorted_NBA_players,TEAM== "Atlanta Hawks")
+ggplot(Atlanta_Hawks, aes(x= Salary1000, y = NAME, color = POSITION )) + geom_point() + labs (
+title ="Salary players in Atlanta Hawks", 
+subtitle = "(2022-2023)",
+caption = "Data from ESPN webside")
+```
+
+
+
+
+
+
+
 
 
 
