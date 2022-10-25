@@ -114,6 +114,21 @@ NFL %>% summarise(mean_salary1000 = mean(Salary1000), sd_salary1000 = sqrt(var(S
   
 ```
 
+```{r}
+ggplot(NBA, aes(x = SALARY/1000))+ geom_histogram(binwidth = 2000, color="black", fill = "green") +
+scale_x_continuous(name = "Salary NBA players", breaks= seq(0,50000,5000)) + ggtitle("Plot of salary in NBA") + theme_dark()+ 
+scale_y_continuous(name = "Count of NBA players")
+
+ggplot(NHL, aes(x = SALARY/1000))+ geom_histogram(binwidth = 1000, color="black", fill = "blue") +
+scale_x_continuous(name = "Salary NHL players", breaks= seq(0,15000,2000)) + ggtitle("Plot of salary in NHL") + theme_dark()+ 
+scale_y_continuous(name = "Count of NHL players") 
+ggplot(NFL, aes(x = SALARY/1000))+ geom_histogram(binwidth = 5000, color="black", fill = "red") +
+scale_x_continuous(name = "Salary NFL players", breaks= seq(0,230000,20000)) + ggtitle("Plot of salary in NFL") + theme_dark()+ 
+scale_y_continuous(name = "Count of NFL players")
+
+
+```
+
 
 
 ```{r}
