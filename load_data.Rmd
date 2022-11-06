@@ -45,7 +45,7 @@ NFL <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NFL_salary_20222023.csv",
 
 ```{r}
 NHL <- read_csv2("C:/Users/piotr/OneDrive/Pulpit/salary/NHL_salary_20222023.csv")
-NHL$NAME<-gsub("/xa0", "", NHL$NAME)
+NHL$NAME<-gsub("\xa0", "", NHL$NAME)
 ```
 
 ### Load data with salary in NHL
@@ -53,7 +53,6 @@ NHL$NAME<-gsub("/xa0", "", NHL$NAME)
 ```{r}
 NBA_player_statistics20212022<- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NBA_total_statistic_20212022.csv", sep = ";")
 NBA_player_statistics20202021<- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NBA_total_statistic_20202021.csv", sep = ";")
-
 ```
 
 ### Load date with personal statistics in 2021/2022 season
@@ -99,6 +98,8 @@ NHL <- NHL%>% mutate(Salary1000 = SALARY/1000)
 
 ```{r}
 NBA_Salary_20222023 %>% summarise(mean_salary1000 = mean(Salary1000), sd_salary1000 = sqrt(var(Salary1000)), median_salary1000= median(Salary1000), min_salary1000 = min(Salary1000), max_salary1000 = max(Salary1000))
+
+summary(NBA_Salary_20222023$Salary1000)
 
 NBA_Salary_20212022 %>% summarise(mean_salary1000 = mean(Salary1000), sd_salary1000 = sqrt(var(Salary1000)), median_salary1000= median(Salary1000), min_salary1000 = min(Salary1000), max_salary1000 = max(Salary1000))
 
@@ -246,14 +247,14 @@ Utah_Jazz <- filter(NBA_Salary_20222023,TEAM== "Utah Jazz")
 ggplot(Utah_Jazz, aes(x = Salary1000,y=NAME, shape= POSITION)) + geom_point() + labs (title = "Salary players in Utah Jazz")
 
 Washington_Wizards <- filter(NBA_Salary_20222023,TEAM== "Washington Wizards")
-ggplot(Washington_Wizards, aes(x = Salary1000,y=NAME, shape= POSITION)) + geom_point() + labs (title = "Salary players in Washington Wizards")
+ggplot(Washington_Wizards, aes(x = Salary1000,y=NAME, color= POSITION)) + geom_point() + labs (title = "Salary players in Washington Wizards")
 
 ```
 
 
 
 ```{r}
-Northwest_Salary_20222023 <- filter(NBA_Salary_20222023, TEAM == "Portland Trail Blazers"|  TEAM == "Utah Jazz"|  TEAM =="Denver Nuggets" |  TEAM =="Minnesota Timberwolves" |  TEAM =="Oklahoma City Thunder")
+Northwest_Salary_20222023 <- filter(NBA_Salary_20222023, TEAM == "Portland Trail Blazers" |  TEAM == "Utah Jazz"|  TEAM =="Denver Nuggets" |  TEAM =="Minnesota Timberwolves" |  TEAM =="Oklahoma City Thunder")
 Southwest_Salary_20222023 <- filter(NBA_Salary_20222023, TEAM == "Dallas Mavericks" | TEAM == "Houston Rockets"| TEAM == "San Antonio Spurs"| TEAM == "Memphis Grizzlies")
 Paciffic_Salary_20222023 <- filter(NBA_Salary_20222023, TEAM == "Phoenix Suns"| TEAM == "Golden State Warriors" | TEAM == "LA Clippers" | TEAM == "Los Angeles Lakers" | TEAM == "Sacramento Kings")
 ```
@@ -303,6 +304,12 @@ plot(Utah_Jazz$INDEX,Utah_Jazz$Salary1000)
 Atalanta_Hawks_sum<- sum(Atlanta_Hawks$Salary1000)
 
 ```
+
+```{r}
+NBA_Salary_20212022 %>% group_by(TEAM) %>%
+  summarise(sum = sum(Salary1000))  
+```
+
 
 
 
