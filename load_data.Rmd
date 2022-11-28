@@ -35,6 +35,24 @@ NBA_Salary_20222023 <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NBA_salar
 NBA_Salary_20212022 <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NBA_salary_20212022.csv", sep = ";")
 ```
 
+```{r}
+NBA_Salary_20172018 <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NBA_salary_20172018.csv", sep = ";", dec = ",")
+
+```
+
+```{r}
+NBA_Total_Statistic_20172018 <- read.csv("C:/Users/piotr/OneDrive/Pulpit/salary/NBA_total_statistic_20172018.csv", sep = ";", dec = ",")
+```
+
+```{r}
+NBA_Total_Statistic_20172018 <- rename(NBA_Total_Statistic_20172018, NAME = Player)
+```
+```{r}
+First_Left_Join <- left_join(NBA_Salary_20172018,NBA_Total_Statistic_20172018, by = "NAME")
+```
+
+
+
 ### Load data with salary in NBA
 
 ```{r}
